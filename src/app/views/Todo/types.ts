@@ -1,13 +1,13 @@
 /* --- STATE --- */
-export interface IUserSignInState {
+export interface IToDoState {
     loading: boolean;
-    signIn: ISignInForm;
+    todos: ITodo[];
   }
   
-  export interface ISignInForm {
-    email: string;
-    username: string;
+  export interface ITodo {
+    id: number | string;
+    todo: string;
   }
   
-  export type ContainerState = IUserSignInState;
+  export type ContainerState = IToDoState;
   
