@@ -1,29 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ContainerState, ISignInForm } from './types';
+import TodoList from './components/ToDoList';
+import { ContainerState, ITodo } from './types';
 
 
 export const initialState: ContainerState = {
     loading: false,
-    signIn: {
-        username: '',
-        email: ''
-    }
+    todos: [],
 }
 
-export const signInSlice = createSlice({
-    name: 'signin',
+export const toDoSlice = createSlice({
+    name: 'toDo',
     initialState,
     reducers: {
-        postSignIn(state, action: PayloadAction<ISignInForm>) {
-            const { email, username } = action.payload
+        postToDo(state, action: PayloadAction<any>) {
             state.loading = true;
-            state.signIn.email = email;
-            state.signIn.username = username;
+            state.todos = [...state.todos, action.payload]
         },
-        postSignInSuccess(state){
+        postToDoSuccess(state){
             state.loading = false;    
+        },
+        deleteTodo(state, action: PayloadAction<number | string>) {
+            state.loading = true;
+            state.todos = state.todos.filter((_, index) => index !== action.payload);
+        },
+        deleteTodoSuccess(state){
+            state.loading = false;
         }    
+
     }
 });
 
-export const { actions, reducer, name: sliceKey } = signInSlice;
+export const { actions, reducer, name: sliceKey } = toDoSlice;
