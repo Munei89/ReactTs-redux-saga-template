@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { reducer, sliceKey, actions } from './slice';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import selectState from './selectors';
 
 
 const ToDoForm = (saveTodo?: any ) => {
+  
   const [value, setValue] = useState<string>('');
   
   const dispatch = useDispatch();
