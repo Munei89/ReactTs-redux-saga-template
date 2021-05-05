@@ -6,7 +6,7 @@ import selectState from './selectors';
 
 
 const ToDoForm = (saveTodo?: any ) => {
-  
+
   const [value, setValue] = useState<string>('');
   
   const dispatch = useDispatch();
@@ -19,8 +19,7 @@ const ToDoForm = (saveTodo?: any ) => {
   };
   
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-    dispatch(actions.postSignIn(values))
+    saveTodo(value);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -43,31 +42,19 @@ const ToDoForm = (saveTodo?: any ) => {
       onFinishFailed={onFinishFailed}
     >
       <Form.Item
-        label="Username"
-        name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        label="Add To Do"
+        name="addTodo"
+        rules={[{ required: true, message: 'Please fill in your todo!' }]}
       >
         <Input 
           size='large'
-          onChange={onChange}
-        />
-      </Form.Item>
-      <Form.Item
-        label="Email"
-        name="email"
-        rules={[{ required: true, message: 'Please input your email!' }]}
-      >
-        <Input 
-          size='large'
-          onChange={onChange}
+          onChange={(event) => setValue(event.target.value)}
         />
       </Form.Item>
       <Button type="primary" htmlType="submit">
-          Submit
+          Add
         </Button>
       </Form>
-      <p>User: {signIn.username}</p>
-      <p>Email: {signIn.email}</p>
       </>
   );
 };
