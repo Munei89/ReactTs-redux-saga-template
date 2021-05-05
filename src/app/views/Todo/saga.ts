@@ -11,6 +11,7 @@ export function* postSignIn(action: PayloadAction<any>) {
           username,
           email
       }));
+      console.log('here');
     } catch (err) {
       console.log(err);
     }
