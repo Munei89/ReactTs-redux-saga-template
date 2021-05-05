@@ -10,7 +10,7 @@ export const initialState: ContainerState = {
     }
 }
 
-const signInSlice = createSlice({
+export const signInSlice = createSlice({
     name: 'signin',
     initialState,
     reducers: {
