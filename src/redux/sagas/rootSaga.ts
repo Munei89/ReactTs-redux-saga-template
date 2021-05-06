@@ -7,5 +7,4 @@ import { signUp } from "../../app/views/SignUp/saga";
 export function* watcherSaga() {
   yield takeLatest(todoActions.postToDo.type, postToDo);
   yield takeLatest(userActions.signUpUser.type, signUp);
-
 }

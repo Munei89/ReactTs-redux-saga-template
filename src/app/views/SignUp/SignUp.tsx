@@ -1,16 +1,22 @@
-import React, { Fragment, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import selectState from './selectors';
+import React, { Fragment } from 'react';
+import { useDispatch } from 'react-redux';
 import { actions } from './slice';
-import { StyledRow } from './styles';
-import { Typography, Form, Input, Button, Row, Col } from 'antd';
+import { StyledRow, StyledButton } from './styles';
+import selectState from './selectors';
+import { Typography, Form, Input, Button, Row, Col, Alert } from 'antd';
 import { IUserSignUp } from './types';
 
-const { Title, Paragraph, Text, Link } = Typography;
+const { Title } = Typography;
 
 const Signup = () => {
     const dispatch = useDispatch();
     const [form] = Form.useForm();
+    const {
+       user,
+       isError,
+       isFetching,
+       isSuccess, 
+    } = selectState();
 
     const onFinish = (values: IUserSignUp) => {
         dispatch(actions.signUpUser(values));
@@ -68,12 +74,13 @@ const Signup = () => {
                         </Row>
                         <Row justify="center">
                             <Col span={8}>
-                            <Button type="primary" htmlType="submit">
+                            <StyledButton type="primary" htmlType="submit">
                                 Sign Up
-                            </Button>
+                            </StyledButton>
                             </Col>
                         </Row>
                     </Form>
+                    {isSuccess && <Alert type="success" message="Successs" />}
                 </Col>
             </StyledRow>
         </>

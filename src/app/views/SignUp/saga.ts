@@ -2,13 +2,12 @@ import { call, delay, put, takeLatest, select } from "redux-saga/effects";
 import { actions } from './slice';
 import { PayloadAction } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { IUserSignUp } from "./types";
+import { IUserSignUp, IUser } from "./types";
 
-const userPost = (payload: IUserSignUp) => {
+const userPost = (payload: IUser) => {
     const {
-       username,
-       email,
-       password, 
+        username,
+        email,
     } = payload;
     const url = `https://mock-user-auth-server.herokuapp.com/api/v1/users`;
 
@@ -24,25 +23,36 @@ const userPost = (payload: IUserSignUp) => {
         data: {
             username,
             email,
-            password,
         },
     }).catch((error) => {
-        console.log(error);    
+        console.log(error);
     });
 };
 export function* signUp(action: PayloadAction<IUserSignUp>) {
-    
+
     try {
-      const response: IUserSignUp  = yield call(userPost, action.payload);
-      console.log('here');
-      if(response) {
-        yield put(actions.signUpUser(action.payload));
         yield put(actions.signUpUserSuccess());
-      }  
+        yield delay(3000)
+        yield put(actions.clearMessages());
+    } catch (err) {
+        console.log(err);
+        yield put(actions.signUpUserError(err));
+
+    }
+}
+
+export function* signIn(action: PayloadAction<IUser>) {
+
+    try {
+        const response: IUser = yield call(userPost, action.payload);
+        if (response) {
+            yield put(actions.signInUser());
+            yield put(actions.signInUserSuccess(response));
+        }
 
     } catch (err) {
-      console.log(err);
-      yield put(actions.signUpUserError(err));
+        console.log(err);
+        yield put(actions.signInUserError(err));
 
     }
 }
@@ -50,5 +60,6 @@ export function* signUp(action: PayloadAction<IUserSignUp>) {
 
 export function* userSignInSaga() {
     takeLatest(actions.signUpUser.type, signUp);
+    takeLatest(actions.signInUser.type, signIn);
+
 }
-  
