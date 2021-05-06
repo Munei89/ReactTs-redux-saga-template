@@ -1,7 +1,7 @@
 /* --- STATE --- */
 export interface IToDoState {
     loading: boolean;
-    todos: ITodo[];
+    data: ITodo[];
   }
   
   export interface ITodo {

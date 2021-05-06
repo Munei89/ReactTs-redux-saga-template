@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import logo from './logo.svg';
 import ToDoForm from './app/views/Todo';
+import SignUp from './app/views/SignUp';
 import {
   BrowserRouter as Router,
   Switch,
@@ -29,6 +30,7 @@ function App() {
           <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <Link to='/to-do'>To Do App</Link>
+          <Link to='/forms'>Forms</Link>
         </header>
         </Col>
       </Row>
@@ -38,6 +40,9 @@ function App() {
        <Switch>
           <Route path="/to-do">
             <ToDoForm saveTodo={(todoText) => saveTodo(todoText)} />
+          </Route>
+          <Route path="/forms">
+            <SignUp />
           </Route>
         </Switch>
        </Col>
