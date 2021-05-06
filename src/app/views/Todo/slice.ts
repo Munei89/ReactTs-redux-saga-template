@@ -1,27 +1,27 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import TodoList from './components/ToDoList';
-import { ContainerState, ITodo } from './types';
+import { ContainerState } from './types';
 
 
 export const initialState: ContainerState = {
     loading: false,
-    todos: [],
+    data: [],
 }
 
 export const toDoSlice = createSlice({
-    name: 'toDo',
+    name: 'todo',
     initialState,
     reducers: {
         postToDo(state, action: PayloadAction<any>) {
             state.loading = true;
-            state.todos = [...state.todos, action.payload]
+            state.data = [...state.data, action.payload]
         },
         postToDoSuccess(state){
             state.loading = false;    
         },
         deleteTodo(state, action: PayloadAction<number | string>) {
             state.loading = true;
-            state.todos = state.todos.filter((_, index) => index !== action.payload);
+            state.data = state.data.filter((_, index) => index !== action.payload);
         },
         deleteTodoSuccess(state){
             state.loading = false;
@@ -31,3 +31,4 @@ export const toDoSlice = createSlice({
 });
 
 export const { actions, reducer, name: sliceKey } = toDoSlice;
+export default toDoSlice.reducer

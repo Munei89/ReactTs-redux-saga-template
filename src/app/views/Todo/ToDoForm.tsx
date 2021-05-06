@@ -20,7 +20,7 @@ const ToDoForm = (props: ITodoProps) => {
   const dispatch = useDispatch();
 
   const [form] = Form.useForm();
-  const { todos } = selectState();
+  const { data } = selectState();
 
   const onFinish = () => {
     saveTodo(value);
@@ -66,7 +66,7 @@ const ToDoForm = (props: ITodoProps) => {
             Add
         </StyledButton>
         </Form>
-         <TodoList todos={todos} deleteTodo={onDelete}/>
+         <TodoList todos={data} deleteTodo={onDelete}/>
       </Col>
     </StyledRow>
   );

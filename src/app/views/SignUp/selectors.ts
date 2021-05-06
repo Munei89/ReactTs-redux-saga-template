@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../types';
 
 export const selectDomain = (state: RootState) =>
-  state?.todos || initialState;
+  state?.user || initialState;
 
 export const select = () => createSelector([selectDomain], state => state);
 
